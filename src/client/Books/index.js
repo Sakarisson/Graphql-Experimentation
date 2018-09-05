@@ -1,0 +1,23 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { PropTypes as MobxPropTypes } from 'mobx-react';
+
+import BookModel from 'Store/Book';
+
+import BookView from './BookView';
+
+const Books = ({ books }) => (
+  <div className="books">
+    {books.map(book => <BookView book={book} />)}
+  </div>
+);
+
+Books.propTypes = {
+  books: MobxPropTypes.observableArrayOf(PropTypes.instanceOf(BookModel)),
+};
+
+Books.defaultProps = {
+  books: [],
+};
+
+export default Books;
