@@ -1,4 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server-express');
+const _ = require('underscore');
+
 const data = require('./Data');
 
 const { books } = data;
@@ -11,7 +13,7 @@ module.exports = (app) => {
     }
 
     type Query {
-      books: [Book]
+      books(author: String): [Book]
     }
 
     type Mutation {
@@ -21,7 +23,7 @@ module.exports = (app) => {
 
   const resolvers = {
     Query: {
-      books: () => books,
+      books: (root, args) => _.filter(books, args),
     },
     Mutation: {
       addBook: (root, { title, author }) => {

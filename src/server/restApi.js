@@ -1,4 +1,6 @@
 const express = require('express');
+const _ = require('underscore');
+
 const data = require('./Data');
 
 const { books } = data;
@@ -11,6 +13,13 @@ restApi.get('/', (req, res) => {
 
 restApi.get('/books', (req, res) => {
   res.json(books);
+});
+
+restApi.get('/books/:author', (req, res) => {
+  const { params } = req;
+  const { author } = params;
+  const matchingBooks = _.filter(books, { author });
+  res.json(matchingBooks);
 });
 
 restApi.post('/books', (req, res, next) => {
