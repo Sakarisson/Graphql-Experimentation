@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const routes = require('./routes');
 
 const restApi = require('./restApi');
+const setupGraphql = require('./graphqlApi');
 
 module.exports = async () => {
   const app = express();
@@ -14,11 +15,12 @@ module.exports = async () => {
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(express.json());
+  setupGraphql(app);
 
   // Routes
   app.use('/build', express.static(path.join(__dirname, '../..', 'build', 'src')));
   app.use('/public', express.static(path.join(__dirname, '../..', 'public')));
-  app.use('/restapi', restApi);
+  app.use('/rest', restApi);
   app.use('/', routes);
 
   return app;
