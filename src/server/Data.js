@@ -7,6 +7,14 @@ const books = [
     title: 'Jurassic Park',
     author: 'Michael Crichton',
   },
+  {
+    title: 'Timeline',
+    author: 'Michael Crichton',
+  },
+  {
+    title: '1984',
+    author: 'George Orwell',
+  },
 ];
 
 module.exports = { books };
