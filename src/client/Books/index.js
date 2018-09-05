@@ -1,26 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  observer,
-  PropTypes as MobxPropTypes,
-} from 'mobx-react';
+import { observer } from 'mobx-react';
 
-import BookModel from 'Store/Book';
+import Store from 'Store';
 
 import BookView from './BookView';
+import AddBook from './AddBook';
 
-const Books = ({ books }) => (
+const Books = ({ store }) => (
   <div className="books">
-    {books.map(book => <BookView book={book} key={book.localId} />)}
+    {store.books.map(book => <BookView book={book} key={book.localId} />)}
+    <AddBook store={store} />
   </div>
 );
 
 Books.propTypes = {
-  books: MobxPropTypes.observableArrayOf(PropTypes.instanceOf(BookModel)),
-};
-
-Books.defaultProps = {
-  books: [],
+  store: PropTypes.instanceOf(Store).isRequired,
 };
 
 export default observer(Books);

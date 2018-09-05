@@ -1,39 +1,29 @@
 import { action, observable } from 'mobx';
-import ApolloClient from 'apollo-boost';
-import gql from 'graphql-tag';
 
+import Api from './Api';
 import Book from './Book';
 
 class BookStore {
-  apolloClient;
+  api;
 
   @observable books = [];
 
-  @action addBook({ author, title }) {
-    const book = new Book({ author, title });
-    this.books.push(book);
+  @action addBook(book) {
+    if (!(book instanceof Book)) {
+      this.books.push(new Book(book));
+    } else {
+      this.books.push(book);
+    }
   }
 
-  async fetchData() {
-    const query = await this.apolloClient.query({
-      query: gql`
-        query {
-          books {
-            title
-            author
-          }
-        }
-      `,
-    });
-    const { data } = query;
-    const { books } = data;
-
+  async init() {
+    const books = await this.api.getBooks();
     books.forEach(book => this.addBook(book));
   }
 
   constructor() {
-    this.apolloClient = new ApolloClient();
-    this.fetchData();
+    this.api = new Api();
+    this.init();
   }
 }
 

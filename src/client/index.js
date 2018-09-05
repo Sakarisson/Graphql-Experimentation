@@ -12,7 +12,7 @@ const instance = new Store();
 
 window.store = instance;
 
-const App = ({ store }) => <Books books={store.books} />;
+const App = ({ store }) => <Books store={store} />;
 
 App.propTypes = {
   store: PropTypes.instanceOf(Store).isRequired,
