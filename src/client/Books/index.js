@@ -11,7 +11,7 @@ import BookView from './BookView';
 
 const Books = ({ books }) => (
   <div className="books">
-    {books.map(book => <BookView book={book} />)}
+    {books.map(book => <BookView book={book} key={book.localId} />)}
   </div>
 );
 

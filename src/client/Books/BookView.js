@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 
 import BookModel from 'Store/Book';
 
@@ -15,4 +16,4 @@ BookView.propTypes = {
   book: PropTypes.instanceOf(BookModel).isRequired,
 };
 
-export default BookView;
+export default observer(BookView);
