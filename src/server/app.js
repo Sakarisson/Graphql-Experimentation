@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const routes = require('./routes');
 
+const restApi = require('./restApi');
+
 module.exports = async () => {
   const app = express();
 
@@ -16,6 +18,7 @@ module.exports = async () => {
   // Routes
   app.use('/build', express.static(path.join(__dirname, '../..', 'build', 'src')));
   app.use('/public', express.static(path.join(__dirname, '../..', 'public')));
+  app.use('/restapi', restApi);
   app.use('/', routes);
 
   return app;
