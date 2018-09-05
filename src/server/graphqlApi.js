@@ -14,6 +14,7 @@ module.exports = (app) => {
 
     type Query {
       books(author: String): [Book]
+      authors: [String]
     }
 
     type Mutation {
@@ -24,6 +25,7 @@ module.exports = (app) => {
   const resolvers = {
     Query: {
       books: (root, args) => _.filter(books, args),
+      authors: () => _.unique(_.pluck(books, 'author')),
     },
     Mutation: {
       addBook: (root, { title, author }) => {

@@ -22,6 +22,11 @@ restApi.get('/books/:author', (req, res) => {
   res.json(matchingBooks);
 });
 
+restApi.get('/authors', (req, res) => {
+  const authors = _.unique(_.pluck(books, 'author'));
+  res.json(authors);
+});
+
 restApi.post('/books', (req, res, next) => {
   const { body } = req;
   const { title, author } = body;
