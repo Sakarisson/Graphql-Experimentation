@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
-import withApolloProvider from 'HOC/withApolloProvider';
 
 import ReactDOM from 'react-dom';
 import 'babel-polyfill';
@@ -20,10 +18,6 @@ App.propTypes = {
   store: PropTypes.instanceOf(Store).isRequired,
 };
 
-const AppWithProviders = compose(
-  withApolloProvider,
-)(App);
+ReactDOM.render(<App store={instance} />, document.getElementById('root'));
 
-ReactDOM.render(<AppWithProviders store={instance} />, document.getElementById('root'));
-
-export default AppWithProviders;
+export default App;
