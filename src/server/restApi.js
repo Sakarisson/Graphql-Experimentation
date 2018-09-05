@@ -13,4 +13,16 @@ restApi.get('/books', (req, res) => {
   res.json(books);
 });
 
+restApi.post('/books', (req, res, next) => {
+  const { body } = req;
+  const { title, author } = body;
+  if (!title || !author) {
+    next();
+    return;
+  }
+  const book = { title, author };
+  books.push(book);
+  res.json(book);
+});
+
 module.exports = restApi;

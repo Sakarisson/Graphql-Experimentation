@@ -6,18 +6,29 @@ const { books } = data;
 module.exports = (app) => {
   const typeDefs = gql`
     type Book {
-      title: String
-      author: String
+      title: String!
+      author: String!
     }
 
     type Query {
       books: [Book]
+    }
+
+    type Mutation {
+      addBook(title: String!, author: String!): Book
     }
   `;
 
   const resolvers = {
     Query: {
       books: () => books,
+    },
+    Mutation: {
+      addBook: (root, { title, author }) => {
+        const newBook = { title, author };
+        books.push(newBook);
+        return newBook;
+      },
     },
   };
 
