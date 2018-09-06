@@ -9,6 +9,7 @@ import AddBook from './AddBook';
 
 const Books = ({ store }) => (
   <div className="books">
+    All books:
     {store.books.map(book => <BookView book={book} key={book.localId} />)}
     <AddBook store={store} />
   </div>
