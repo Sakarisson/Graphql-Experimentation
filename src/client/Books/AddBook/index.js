@@ -16,11 +16,25 @@ const AddBook = ({
     <form onSubmit={handleSubmit}>
       <label htmlFor="title">
         Title:
-        <input type="text" name="title" id="title" value={title} onChange={handleFormChange} />
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value={title}
+          required
+          onChange={handleFormChange}
+        />
       </label>
       <label htmlFor="author">
         Author:
-        <input type="text" name="author" id="author" value={author} onChange={handleFormChange} />
+        <input
+          type="text"
+          name="author"
+          id="author"
+          value={author}
+          required
+          onChange={handleFormChange}
+        />
       </label>
       <input type="submit" value="Submit" />
     </form>

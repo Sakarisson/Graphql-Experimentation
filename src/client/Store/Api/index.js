@@ -18,6 +18,9 @@ class Api {
   }
 
   async addBook({ title, author }) {
+    if (title === '' || author === '') {
+      return null;
+    }
     const query = await this.apolloClient.mutate({
       mutation: gqlAddBook,
       variables: {
@@ -25,8 +28,8 @@ class Api {
       },
     });
     const { data } = query;
-    const { addBook } = data;
-    this.addBook(addBook);
+    const addedBook = data.addBook;
+    return addedBook;
   }
 
   constructor() {
